@@ -1,0 +1,22 @@
+# 统一换行，避免 Windows / Linux 协作时的整文件 diff
+* text=auto eol=lf
+
+# Windows 批处理必须保留 CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# 二进制
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.onnx binary
+*.db binary
+
+# 依赖清单不要被语言统计淹没
+package-lock.json -diff linguist-generated

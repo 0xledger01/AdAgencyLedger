@@ -1,0 +1,51 @@
+# ---------- Python ----------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---------- Node / 前端构建 ----------
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- 密钥与本地配置 ----------
+.env
+.env.*
+!.env.example
+
+# ---------- 运行时数据（本地演示库不入库） ----------
+data/app.db
+data/app.db-*
+data/backup/
+data/uploads/*
+!data/uploads/.gitkeep
+data/*.log
+
+# ---------- 本地工具产物 / 临时目录 ----------
+.backups/
+backup/
+.shots/
+_scratch/
+.workbuddy/
+.tmp-*/
+.tmp_*
+.tmp-*.log
+tmp-probe-*.mjs
+
+# ---------- 编辑器 / 系统 ----------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+data/*.csv
