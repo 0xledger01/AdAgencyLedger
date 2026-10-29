@@ -1,17 +1,46 @@
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-BASE_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = BASE_DIR / "data"
+# ---------------------------------------------------------------------------
+# 路径三分法（打包成单文件 exe 的关键）
+#
+#   RESOURCE_DIR  只读资源：前端 dist(web/)、OCR 模型等，onefile 模式下在
+#                 sys._MEIPASS 临时解压目录里，进程退出即销毁。
+#   DATA_DIR      可写运行数据：SQLite、上传件、CRM 缓存。**必须**落在 exe
+#                 同级目录，否则重启一次数据就没了。
+#   WEB_DIR       前端产物目录，dev 下是 frontend/dist，打包后在 _MEIPASS/web。
+#
+# dev 模式下 FROZEN 为 False，三者与改造前完全一致（BASE_DIR = 项目根）。
+# ---------------------------------------------------------------------------
+FROZEN = bool(getattr(sys, "frozen", False))
+
+if FROZEN:
+    RESOURCE_DIR = Path(getattr(sys, "_MEIPASS", Path(sys.executable).parent))
+    APP_DIR = Path(sys.executable).resolve().parent
+    DATA_DIR = APP_DIR / "data"
+    WEB_DIR = RESOURCE_DIR / "web"
+else:
+    RESOURCE_DIR = Path(__file__).resolve().parents[2]
+    APP_DIR = RESOURCE_DIR
+    DATA_DIR = APP_DIR / "data"
+    WEB_DIR = APP_DIR / "frontend" / "dist"
+
+# 兼容旧引用（.env 查找位置、日志路径等仍按 BASE_DIR 理解）
+BASE_DIR = APP_DIR
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=str(BASE_DIR / ".env"), env_file_encoding="utf-8", extra="ignore"
     )
+
+    # 是否由后端托管前端产物。main.py 里还会再判断 WEB_DIR/index.html 是否存在，
+    # 两者同时满足才挂载静态路由（否则纯 API 模式照样能跑）。
+    serve_frontend: bool = True
 
     app_name: str = "海外广告代理业务系统"
     debug: bool = True

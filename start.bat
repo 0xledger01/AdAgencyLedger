@@ -22,12 +22,14 @@ if not exist "frontend\node_modules" (
 )
 
 echo [1/2] 启动后端  http://127.0.0.1:8012
-start "adsys-backend" cmd /c ".venv\Scripts\python.exe -m uvicorn backend.app.main:app --reload --port 8012"
+start "adsys-backend" cmd /k ".venv\Scripts\python.exe -m uvicorn backend.app.main:app --port 8012 --host 127.0.0.1"
 
 echo [2/2] 启动前端  http://127.0.0.1:5173
-start "adsys-frontend" cmd /c "cd frontend && npx vite"
+start "adsys-frontend" cmd /k "cd /d frontend && npx vite --port 5173 --strictPort --host 127.0.0.1"
 
-timeout /t 6 /nobreak >nul
+echo.
+echo 等待服务就绪（约 8 秒）...
+timeout /t 8 /nobreak >nul
 start "" http://127.0.0.1:5173
 
 echo.
@@ -38,6 +40,6 @@ echo.
 echo 内部账号：admin / admin123 ；sales01 / risk01 / finance01 / ops01 密码 123456
 echo 客户账号：client1 / client2 / client3 密码 123456
 echo.
-echo 步骤：先登录内部后台看「客户管理」，审核一家公司走完三级流程，再去「资金流水」看三视图。
+echo 两个服务窗口会保留不闪退，出错时窗口里的报错可以直接看到。
 echo.
 pause
