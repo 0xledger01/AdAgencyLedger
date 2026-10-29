@@ -42,7 +42,7 @@ class Settings(BaseSettings):
     # 两者同时满足才挂载静态路由（否则纯 API 模式照样能跑）。
     serve_frontend: bool = True
 
-    app_name: str = "海外广告代理业务系统"
+    app_name: str = "AdAgencyLedger · 海外广告代理业务系统"
     debug: bool = True
 
     # 本地默认 SQLite 单文件；换 Postgres 只改这一行

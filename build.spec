@@ -1,8 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
-"""PyInstaller 打包配置：产出单文件免安装 CrossAccount.exe。
+"""PyInstaller 打包配置：产出单文件免安装 AdAgencyLedger.exe。
 
 产物布局（onefile，运行时解压到 sys._MEIPASS）：
-    CrossAccount.exe            ← dist/CrossAccount.exe
+    AdAgencyLedger.exe          ← dist/AdAgencyLedger.exe
     ├─ (内部) _MEIPASS/web                ← frontend/dist 全量（config.WEB_DIR）
     ├─ (内部) _MEIPASS/rapidocr_onnxruntime/  ← OCR 模型 + 包内 config.yaml
     └─ (旁边) data/app.db, data/uploads/   ← 可写数据，落 exe 同级，重启不丢
@@ -152,7 +152,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name="CrossAccount",
+    name="AdAgencyLedger",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

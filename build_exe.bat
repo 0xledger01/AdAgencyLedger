@@ -4,7 +4,7 @@ cd /d "%~dp0"
 setlocal
 
 echo ============================================================
-echo   CrossAccount.exe 打包（免安装单文件）
+echo   AdAgencyLedger.exe 打包（免安装单文件）
 echo ============================================================
 
 if not exist ".venv\Scripts\python.exe" (
@@ -34,11 +34,11 @@ if errorlevel 1 (
 
 echo.
 echo [3/3] 产物检查 ...
-if not exist "dist\CrossAccount.exe" (
-  echo [错误] 未生成 dist\CrossAccount.exe
+if not exist "dist\AdAgencyLedger.exe" (
+  echo [错误] 未生成 dist\AdAgencyLedger.exe
   goto :fail
 )
-for %%F in ("dist\CrossAccount.exe") do (
+for %%F in ("dist\AdAgencyLedger.exe") do (
   echo    路径：%%~fF
   echo    体积：%%~zF 字节
 )
@@ -46,7 +46,7 @@ for %%F in ("dist\CrossAccount.exe") do (
 echo.
 echo ============================================================
 echo   打包完成。
-echo   CrossAccount.exe 可单独拷到任意目录双击运行；
+echo   AdAgencyLedger.exe 可单独拷到任意目录双击运行；
 echo   首次运行会在同级自动创建 data 目录（数据库与上传件）。
 echo ============================================================
 exit /b 0

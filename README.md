@@ -1,6 +1,16 @@
-# 海外广告代理业务系统
+# AdAgencyLedger · 海外广告代理业务系统
+
+> **Self-hosted back-office for ad agencies & media buyers.**
+> Client onboarding with 3-step KYC · ad account provisioning · prepaid top-up ·
+> **immutable double-entry ledger** · daily ad spend import · client self-service portal.
+> `FastAPI` · `React` · `TypeScript` · `SQLAlchemy` · `SQLite → PostgreSQL`
 
 二级广告代理的内部业务系统 + 客户自助门户。一句话：**客户把钱给我们，我们把钱加到他名下的广告账户里，媒体消耗掉，月底大家能对上账。**
+
+> 这套系统的重点不是"又一个后台管理面板"，而是**钱一本账都改不了**：
+> 余额只有一个写入口（`ledger.post()`）、流水只追加（ORM 事件 + 数据库触发器双保险）、
+> 纠错只能红字冲正。适合任何「预付款 → 分配到子账户 → 平台扣费 → 与客户对账」的代理业务
+> （广告代理、游戏点卡代理、SaaS 分销、跨境服务代付）。
 
 两端的边界很硬：
 
@@ -10,6 +20,10 @@
 | 客户门户 | 客户自己 | `/portal` | 只看自己的数据，发起申请，不能动钱 |
 
 两端 URL 不通、登录页不互通，交叉登录后端直接 403。客户侧永远看不到返点、成本系数、渠道。
+
+**关键词**：ad agency management system · advertising agency back-office · media buying agency software ·
+ad account management · ad spend tracking · prepaid wallet top-up · double-entry ledger ·
+client portal · TikTok Ads account provisioning · 广告代理系统 · 广告账户管理 · 充值加款 · 复式记账
 
 ---
 
@@ -342,7 +356,7 @@ portal 登录页 → 客户申请 → 客户管理 → 开户管理 → 广告�
 
 ### 方式一：免安装 exe（给别人 / 换机器）
 
-从 [Releases](https://github.com/BYL01/CrossAccount/releases) 下载 `CrossAccount.exe`，双击即可，**不需要装 Python / Node**。
+从 [Releases](https://github.com/BYL01/AdAgencyLedger/releases) 下载 `AdAgencyLedger.exe`，双击即可，**不需要装 Python / Node**。
 
 - 地址：http://127.0.0.1:8012 （**单端口**，API 和前端同一个端口）
 - 客户门户：http://127.0.0.1:8012/portal

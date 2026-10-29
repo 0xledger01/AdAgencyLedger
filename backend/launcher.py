@@ -115,19 +115,22 @@ def print_banner(port: int, data_dir: Path, actual_port_shifted: bool) -> None:
     """启动横幅：用户双击 exe 后唯一能看懂的说明书。"""
     line = "=" * 62
     print(line, flush=True)
-    print("  海外广告代理业务系统  已启动（关闭本窗口即停止服务）", flush=True)
+    print("  AdAgencyLedger · 海外广告代理业务系统", flush=True)
+    print("  已启动（关闭本窗口即停止服务）", flush=True)
     print(line, flush=True)
     print(f"  访问地址 : http://{HOST}:{port}/", flush=True)
+    print(f"  客户门户 : http://{HOST}:{port}/portal", flush=True)
+    print(f"  接口文档 : http://{HOST}:{port}/docs", flush=True)
     if actual_port_shifted:
         print(
             f"  端口提示 : {DEFAULT_PORT} 已被占用，自动顺延到 {port}",
             flush=True,
         )
+    print(line, flush=True)
     print("  内部账号 : admin / admin123", flush=True)
-    print("  客户门户 : client1 / 123456", flush=True)
+    print("  客户账号 : client1 / 123456", flush=True)
     print(f"  数据目录 : {data_dir}", flush=True)
     print("             （数据库 app.db、上传件都存这里，备份请连同此目录）", flush=True)
-    print("  接口文档 : http://%s:%s/docs" % (HOST, port), flush=True)
     print(line, flush=True)
 
 
